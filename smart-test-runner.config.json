@@ -1,0 +1,44 @@
+{
+    "testFramework": "playwright",
+    "modules": [
+        {
+            "name": "auth",
+            "path": "src/auth",
+            "testPath": "src/auth/tests",
+            "dependencies": [],
+            "maxShards": 4,
+            "testArgs": "--headed=false"
+        },
+        {
+            "name": "payment",
+            "path": "src/payment",
+            "testPath": "src/payment/tests",
+            "dependencies": ["auth"],
+            "maxShards": 6,
+            "testArgs": "--headed=false"
+        },
+        {
+            "name": "user-profile",
+            "path": "src/user-profile",
+            "testPath": "src/user-profile/tests",
+            "dependencies": ["auth"],
+            "maxShards": 4,
+            "testArgs": "--headed=false"
+        }
+    ],
+    "maxShards": 8,
+    "frameworkConfig": {
+        "playwright": {
+            "reporter": "html",
+            "retries": 2
+        },
+        "cypress": {
+            "browser": "chrome",
+            "headless": true
+        },
+        "selenium": {
+            "timeout": 30000,
+            "reporter": "spec"
+        }
+    }
+} 
